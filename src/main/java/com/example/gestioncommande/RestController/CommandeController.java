@@ -23,17 +23,27 @@ public class CommandeController {
         this.commandeService = commandeService;
     }
 
-    @GetMapping
+    @GetMapping("getAll")
     public ResponseEntity<List<Commande>> getAllCommandes() {
         List<Commande> commandes = commandeService.getAllCommandes();
         return ResponseEntity.ok(commandes);
     }
+    @PostMapping("saveCommande")
+    public ResponseEntity<Commande> saveCommande(@RequestBody Commande commande) {
+        Commande savedCommande = commandeService.saveCommande(commande);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedCommande);
+    }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Commande> getCommandeById(@PathVariable("id") long id) {
+    @GetMapping("getCommandeById/{id}")
+    public ResponseEntity<Commande> getCommandeById(@PathVariable("id") String id) {
         Optional<Commande> commande = commandeService.getCommandeById(id);
         return commande.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
 
+    @DeleteMapping("deleteCommandeById/{id}")
+    public ResponseEntity<Void> deleteCommandeById(@PathVariable String id) {
+        commandeService.deleteCommandeById(id);
+        return ResponseEntity.noContent().build();
+    }
 }

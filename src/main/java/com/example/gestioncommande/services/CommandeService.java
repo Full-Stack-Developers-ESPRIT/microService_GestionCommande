@@ -35,4 +35,10 @@ public class CommandeService implements IServiceCommande {
     public void deleteCommandeById(String id) {
         commandeRep.deleteById(id);
     }
+
+    @Override
+    public Commande updateCommande(Commande c) {
+        commandeRep.save(c);
+        return c;
+    }
 }

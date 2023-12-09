@@ -12,4 +12,5 @@ public interface IServiceCommande {
     Optional<Commande> getCommandeById(String id);
 
     void deleteCommandeById(String id);
+    Commande updateCommande(Commande c);
 }

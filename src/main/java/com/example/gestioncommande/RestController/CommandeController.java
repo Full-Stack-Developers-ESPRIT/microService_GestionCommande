@@ -46,4 +46,10 @@ public class CommandeController {
         commandeService.deleteCommandeById(id);
         return ResponseEntity.noContent().build();
     }
+    @PutMapping("updateCommande")
+    public ResponseEntity<Commande> updateCommande(@RequestBody Commande commande) {
+        Commande savedCommande = commandeService.updateCommande(commande);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedCommande);
+    }
+
 }
